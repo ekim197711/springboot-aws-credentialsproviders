@@ -28,6 +28,6 @@ dependencies {
 
 test {
     useJUnitPlatform();
-    systemProperty('aws.accessKeyId','AKIA5HK2KTGYSW25KIOU')
-    systemProperty('aws.secretAccessKey', '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')
+//    systemProperty('aws.accessKeyId','AKIA5HK2KTGYSW25KIOU')
+//    systemProperty('aws.secretAccessKey', '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')
 }

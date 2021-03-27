@@ -1,6 +1,7 @@
 package com.example.springbootbucketrenameitem.bucket;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import software.amazon.awssdk.auth.credentials.AwsBasicCredentials;
 import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
@@ -9,8 +10,7 @@ import software.amazon.awssdk.auth.credentials.StaticCredentialsProvider;
 import software.amazon.awssdk.core.sync.RequestBody;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
-import software.amazon.awssdk.services.s3.model.PutObjectRequest;
-import software.amazon.awssdk.services.s3.model.UploadPartCopyRequest;
+import software.amazon.awssdk.services.s3.model.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,9 +18,12 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class BucketService {
     private final DemoConfig demoConfig;
 
@@ -35,12 +38,14 @@ public class BucketService {
         return s3;
     }
 
+    final String DEFAULT_BUCKET_NAME = "MikesDefaultBucket";
+
     public void uploadFile(AwsCredentialsProvider provider) throws IOException {
         S3Client s3 = gimmeClient(provider);
         String bucketName = "mikes-bucket-of-gems1";
         String remotefilename = "myfile"
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH_mm_ss"))
-                +".txt";
+                + ".txt";
 
         InputStream resourceAsStream = BucketService.class.getResourceAsStream("/myfile.txt");
 
@@ -50,9 +55,8 @@ public class BucketService {
                         .key(remotefilename)
                         .build(),
                 RequestBody.fromInputStream(resourceAsStream, resourceAsStream.available())
-                );
+        );
 
         s3.close();
     }
-
 }

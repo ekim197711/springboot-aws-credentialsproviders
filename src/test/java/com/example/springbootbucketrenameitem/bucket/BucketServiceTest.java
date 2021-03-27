@@ -1,5 +1,6 @@
 package com.example.springbootbucketrenameitem.bucket;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,6 +12,7 @@ import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Disabled
 public class BucketServiceTest {
 
     @Autowired
@@ -29,6 +31,7 @@ public class BucketServiceTest {
 
     @Test
     void uploadFileNoPermissions() throws IOException {
+
         ProfileCredentialsProvider nopermissionsProfile = ProfileCredentialsProvider
                 .builder()
                 .profileName("nopermissions")
