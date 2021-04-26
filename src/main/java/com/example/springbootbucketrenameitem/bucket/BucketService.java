@@ -38,7 +38,13 @@ public class BucketService {
         return s3;
     }
 
-    final String DEFAULT_BUCKET_NAME = "MikesDefaultBucket";
+    public void createBucket(AwsCredentialsProvider provider) throws IOException {
+        S3Client s3 = gimmeClient(provider);
+        s3.createBucket(CreateBucketRequest
+                .builder()
+                .bucket("demobucketfun")
+                .build());
+    }
 
     public void uploadFile(AwsCredentialsProvider provider) throws IOException {
         S3Client s3 = gimmeClient(provider);

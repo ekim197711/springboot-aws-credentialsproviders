@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Disabled
+//@Disabled
 public class BucketServiceTest {
 
     @Autowired
@@ -66,5 +66,13 @@ public class BucketServiceTest {
                 .builder()
                 .build();
         bucketService.uploadFile(defaultProfile);
+    }
+
+    @Test
+    void createBucket() throws IOException {
+        DefaultCredentialsProvider defaultProfile = DefaultCredentialsProvider
+                .builder()
+                .build();
+        bucketService.createBucket(defaultProfile);
     }
 }

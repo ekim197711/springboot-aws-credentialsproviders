@@ -22,7 +22,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
-    compile 'software.amazon.awssdk:s3:2.16.3'
+    compile 'software.amazon.awssdk:s3:2.16.39'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
